@@ -1,0 +1,110 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --bg: 248 249 255;
+    --surface: 255 255 255;
+    --surface-2: 255 255 255;
+    --text: 30 35 66;
+    --text-muted: 100 110 145;
+    --border: 230 234 246;
+  }
+  .dark {
+    --bg: 12 18 38;
+    --surface: 22 30 56;
+    --surface-2: 28 37 66;
+    --text: 233 237 251;
+    --text-muted: 150 162 198;
+    --border: 42 52 84;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+  body {
+    @apply font-sans antialiased;
+    background-color: rgb(var(--bg));
+    color: rgb(var(--text));
+  }
+  h1, h2, h3, h4 {
+    @apply font-display;
+    line-height: 1.2;
+  }
+  ::selection {
+    background-color: rgba(107, 123, 240, 0.3);
+  }
+}
+
+@layer components {
+  .glass {
+    @apply backdrop-blur-xl border;
+    background-color: rgba(255, 255, 255, 0.7);
+    border-color: rgba(var(--border), 0.6);
+  }
+  .dark .glass {
+    background-color: rgba(28, 37, 66, 0.55);
+    border-color: rgba(60, 74, 120, 0.5);
+  }
+  .glass-strong {
+    @apply backdrop-blur-2xl border;
+    background-color: rgba(255, 255, 255, 0.82);
+    border-color: rgba(var(--border), 0.5);
+  }
+  .dark .glass-strong {
+    background-color: rgba(22, 30, 56, 0.78);
+    border-color: rgba(60, 74, 120, 0.45);
+  }
+  .surface {
+    background-color: rgb(var(--surface));
+    @apply border;
+    border-color: rgb(var(--border));
+  }
+  .dark .surface {
+    background-color: rgb(var(--surface));
+  }
+  .text-muted {
+    color: rgb(var(--text-muted));
+  }
+  .input-base {
+    @apply w-full rounded-xl border bg-white/70 px-4 py-2.5 text-sm outline-none transition;
+    @apply focus:border-brand-400 focus:ring-2 focus:ring-brand-400/30;
+    border-color: rgb(var(--border));
+  }
+  .dark .input-base {
+    @apply bg-white/5;
+  }
+  .scrollbar-thin::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+  }
+  .scrollbar-thin::-webkit-scrollbar-thumb {
+    @apply rounded-full bg-brand-300/50;
+  }
+  .dark .scrollbar-thin::-webkit-scrollbar-thumb {
+    @apply bg-brand-700/60;
+  }
+}
+
+@layer utilities {
+  .text-gradient {
+    @apply bg-clip-text text-transparent;
+    background-image: linear-gradient(120deg, #6b7bf0, #38bdf8);
+  }
+  .shimmer {
+    position: relative;
+    overflow: hidden;
+  }
+  .shimmer::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    transform: translateX(-100%);
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.45), transparent);
+    animation: shimmer 1.6s infinite;
+  }
+  @keyframes shimmer {
+    100% { transform: translateX(100%); }
+  }
+}
